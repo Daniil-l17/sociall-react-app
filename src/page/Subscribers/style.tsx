@@ -15,7 +15,7 @@ export const $HomeAvatarProfile = styled.div({
 
 export const $AvatarProfileWrapper = styled.div({
 	display: 'flex',
-	gap: '10px',
+	gap: '20px',
 	flexWrap: 'wrap'
 });
 
@@ -47,6 +47,5 @@ export const $UserEmail = styled.span({
 	whiteSpace: 'nowrap',
 	textOverflow: 'ellipsis',
 	overflow: 'hidden',
-	textAlign: 'center',
 	fontWeight: '500'
 });

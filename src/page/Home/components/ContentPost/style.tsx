@@ -11,7 +11,6 @@ export const $ContentItem = styled.div({
 
 export const $ContentDescription = styled.p({
 	marginTop: '10px',
-	fontSize: '14px',
 	fontWeight: '500',
 	color: '#ffffff'
 });

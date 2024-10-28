@@ -13,8 +13,9 @@ import {
 } from './style';
 import { motion } from 'framer-motion';
 import { ContentitemProps } from './types';
+import { variantsAnimate } from '../../utils';
 
-export const Contentitem: FC<ContentitemProps> = ({ item, mutateDelete, isPendingDelete, user }) => {
+export const Contentitem: FC<ContentitemProps> = ({ item, mutateDelete, index, isPendingDelete, user }) => {
 	const [deleteId, setDeleteId] = useState('');
 
 	function handelClickMutateDelete() {
@@ -23,19 +24,29 @@ export const Contentitem: FC<ContentitemProps> = ({ item, mutateDelete, isPendin
 	}
 
 	return (
-		<motion.div whileHover={{ scale: 1.02, transition: { duration: 0.3 }, opacity: 0.75 }} transition={{ duration: 0.5 }}>
+		<motion.div
+			variants={variantsAnimate}
+			initial={'initialElement'}
+			animate={'animateElement'}
+			exit={{ opacity: 0, scale: 0, transition: { duration: 0.5 } }}
+			whileHover={{ scale: 1.02, transition: { duration: 0.3 }, opacity: 0.75 }}
+			transition={{ duration: 0.1 }}
+			custom={index}
+		>
 			<div style={{ position: 'relative', width: '100%' }}>
 				<$ContentItemHeaderDeleteIcon>
 					{user?.id === item.author.id ? (
 						isPendingDelete && deleteId === item.id ? (
 							<Loader size={20} />
 						) : (
-							<RiDeleteBin6Line
-								onClick={() => {
-									handelClickMutateDelete();
-								}}
-								style={{ cursor: 'pointer', zIndex: 2, fontSize: '17px' }}
-							/>
+							<motion.div whileHover={{ scale: 1.2, transition: { duration: 0.3 } }} transition={{ duration: 0.5 }}>
+								<RiDeleteBin6Line
+									onClick={() => {
+										handelClickMutateDelete();
+									}}
+									style={{ cursor: 'pointer', zIndex: 2, fontSize: '17px' }}
+								/>
+							</motion.div>
 						)
 					) : null}
 				</$ContentItemHeaderDeleteIcon>

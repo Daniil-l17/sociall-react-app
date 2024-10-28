@@ -6,4 +6,5 @@ export type ContentitemProps = {
 	isPendingDelete: boolean;
 	mutateDelete: (id: string) => void;
 	user: User;
+	index: number;
 };

@@ -1,4 +1,4 @@
-import { Button, JsonInput, Modal, Textarea } from '@mantine/core';
+import { Button, Modal, Textarea } from '@mantine/core';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { FC, useState } from 'react';
 import { PostsService } from '../../page/Home/services';
@@ -33,7 +33,17 @@ export const CreatePostModal: FC<CreatePostModalProps> = ({ close, opened }) => 
 	return (
 		<Modal size={'lg'} opened={opened} onClose={close} title='Создать пост' centered>
 			<$ContentCreate>
-				<Textarea minRows={4} autosize itemType='string' value={contentText} onChange={event => setContentText(event.currentTarget.value)} size='md' radius='md' placeholder='о чем думаете?' />
+				<Textarea
+					autoFocus
+					minRows={4}
+					autosize
+					itemType='string'
+					value={contentText}
+					onChange={event => setContentText(event.currentTarget.value)}
+					size='md'
+					radius='md'
+					placeholder='о чем думаете?'
+				/>
 				<Button fullWidth onClick={handelClickCreatePost} loading={isPending} variant='filled'>
 					Создать
 				</Button>
