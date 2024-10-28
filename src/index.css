@@ -1,11 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
 
-:root {
-  font-family: "Exo 2", sans-serif;
-  color: #ffffff;
+
+body {
+  background: #121212 !important;
+  font-family: "Rubik", sans-serif;
+  color: #ffffff !important;
 }
 
-/* Reset and base styles  */
 * {
   padding: 0px;
   margin: 0px;
