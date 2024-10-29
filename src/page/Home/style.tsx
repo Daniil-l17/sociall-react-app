@@ -9,3 +9,7 @@ export const $HomeContentWrapper = styled.div({
 	flex: '1',
 	justifyContent: 'center'
 });
+
+export const $HomeProfileUserWpapper = styled.div({
+	width: '280px'
+});

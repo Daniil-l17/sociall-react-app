@@ -71,10 +71,10 @@ export const Users = () => {
 	}
 
 	useEffect(() => {
-		if (!data && !user) {
+		if (!data && !user && !isFetchingUser) {
 			navigate('/');
 		}
-	}, [data]);
+	}, [data, isFetchingUser]);
 
 	return (
 		<$UsersWrapper>
