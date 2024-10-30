@@ -1,14 +1,29 @@
 import { axiosBase } from '../../../config/axiosBase';
+import { User } from '../../../services/types';
 
 export interface posts {
 	id: string;
 	content: string;
 	authorId: string;
 	createdAt: string;
-	likes: any[];
+	likes: Like[];
 	author: Author;
-	comments: any[];
+	comments: Comment[];
 	likedByUser: boolean;
+}
+
+export interface Comment {
+	id: string;
+	content: string;
+	userId: string;
+	postId: string;
+	user: User;
+}
+
+export interface Like {
+	id: string;
+	userId: string;
+	postId: string;
 }
 
 export interface Author {
@@ -17,11 +32,21 @@ export interface Author {
 	password: string;
 	name: string;
 	avatarUrl: string;
-	dateOfBirth: any;
+	dateOfBirth?: string;
 	createdAt: string;
 	updatedAt: string;
-	bio: any;
-	location: any;
+	bio?: string;
+	location?: string;
+}
+
+export interface Author {
+	id: string;
+	email: string;
+	password: string;
+	name: string;
+	avatarUrl: string;
+	createdAt: string;
+	updatedAt: string;
 }
 
 export const PostsService = {
@@ -31,7 +56,16 @@ export const PostsService = {
 	createPost: async (content: string) => {
 		return (await axiosBase.post<posts>('/posts', { content })).data;
 	},
+	currentPost: async (id: string) => {
+		return (await axiosBase.get<posts>(`/posts/${id}`)).data;
+	},
 	deletePost: async (id: string) => {
 		return (await axiosBase.delete<posts>(`/posts/${id}`)).data;
+	},
+	likePost: async (id: string) => {
+		return (await axiosBase.post<posts>(`/likes`, { postId: id })).data;
+	},
+	deleteLikePost: async (id: string) => {
+		return (await axiosBase.delete<posts>(`/likes/${id}`)).data;
 	}
 };

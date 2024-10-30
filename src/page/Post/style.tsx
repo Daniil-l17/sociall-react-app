@@ -46,17 +46,22 @@ export const $ContentItemHeaderUserInfoName = styled.h2({
 	color: '#ffffff'
 });
 
-export const $ContentItemHeartIconWrapper = styled.div({
+export const $ContentItemHeartIconWrapper = styled.h2({
 	display: 'flex',
-	width: '40px',
-	cursor: 'pointer',
 	marginTop: '5px',
 	alignItems: 'center',
 	gap: '10px'
 });
 
-export const $ContentItemHeartIconWpapperContext = styled.div({
+export const $ContentItemHearCommnetWrapper = styled.h2({
 	display: 'flex',
-	alignItems: 'center',
+	marginTop: '15px',
+	flexDirection: 'column',
+	width: '100%',
 	gap: '10px'
+});
+
+export const $ContentItemHearCommnetWrapperButton = styled.h2({
+	display: 'flex',
+	justifyContent: 'end'
 });

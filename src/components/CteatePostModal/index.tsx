@@ -25,7 +25,7 @@ export const CreatePostModal: FC<CreatePostModalProps> = ({ close, opened }) => 
 	});
 
 	function handelClickCreatePost() {
-		if (!contentText) return;
+		if (!contentText) return toast.error('Поле не может быть пустым', { theme: 'colored' });
 		mutate();
 		navigate('/');
 	}
@@ -37,6 +37,7 @@ export const CreatePostModal: FC<CreatePostModalProps> = ({ close, opened }) => 
 					autoFocus
 					minRows={4}
 					autosize
+					onKeyDown={e => e.key === 'Enter' && handelClickCreatePost()}
 					itemType='string'
 					value={contentText}
 					onChange={event => setContentText(event.currentTarget.value)}

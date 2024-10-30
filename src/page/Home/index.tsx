@@ -1,11 +1,13 @@
 import { Loader } from '@mantine/core';
 import { HomeProfileUser } from '../../components/ProfileUser';
-import { $HomeContentWrapper, HomeWrapper } from './style';
+import { $HomeContentWrapper, HomeWrapper, $HomeProfileUserWpapper } from './style';
 import { useAuth } from '../../hooks/userAuth';
 import { useQuery } from '@tanstack/react-query';
 import { PostsService } from './services';
 import { Content } from './components/Content';
 import { Error } from './components/error';
+import { AnimatePresence } from 'framer-motion';
+import { AuthMessaage } from './components/AuthMessage';
 export const Home = () => {
 	const { isLoading: isLoadingUser, user } = useAuth();
 
@@ -18,14 +20,14 @@ export const Home = () => {
 		refetchOnWindowFocus: false
 	});
 
-	console.log(error?.message);
-
 	return (
 		<HomeWrapper>
 			<$HomeContentWrapper>
-				{isLoading || isLoadingUser ? <Loader mt={40} /> : error?.message === 'Request failed with status code 401' ? <p>Авторизайтесь</p> : !data ? <Error /> : <Content data={data!} />}
+				{isLoading || isLoadingUser ? <Loader mt={40} /> : error?.message === 'Request failed with status code 401' ? <AuthMessaage /> : !data ? <Error /> : <Content data={data!} />}
 			</$HomeContentWrapper>
-			<HomeProfileUser user={user} isLoading={isLoadingUser} />
+			<$HomeProfileUserWpapper>
+				<AnimatePresence>{!isLoading && !user ? null : <HomeProfileUser user={user} isLoading={isLoadingUser} />}</AnimatePresence>
+			</$HomeProfileUserWpapper>
 		</HomeWrapper>
 	);
 };

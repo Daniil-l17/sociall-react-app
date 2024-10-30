@@ -7,10 +7,13 @@ import { Skeleton } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { CreatePostModal } from '../CteatePostModal';
 import { motion } from 'framer-motion';
+
+import { useUrlContext } from '../../hooks/useUrlContext';
 export const Dasboard = () => {
 	const { user, isLoading } = useAuth();
 	const { pathname } = useLocation();
 	const [opened, { open, close }] = useDisclosure(false);
+	const { setUrl } = useUrlContext();
 
 	const variantsAnimate = {
 		initialElement: { opacity: 0, scale: 0 },
@@ -32,7 +35,9 @@ export const Dasboard = () => {
 					if (!item.link) {
 						return (
 							<motion.div
-								onClick={open}
+								onClick={() => {
+									open();
+								}}
 								initial={'initialElement'}
 								animate={'animateElement'}
 								custom={index - 2}
@@ -64,6 +69,7 @@ export const Dasboard = () => {
 					return (
 						<motion.div variants={variantsAnimate} initial={'initialElement'} animate={'animateElement'} custom={index} key={index}>
 							<Link
+								onClick={() => setUrl(item.link!)}
 								className={`${css({
 									transition: 'all 0.3s ease-in-out',
 									cursor: 'pointer',
@@ -92,6 +98,7 @@ export const Dasboard = () => {
 			) : (
 				<motion.div variants={variantsAnimate} initial={'initialElement'} animate={'animateElement'}>
 					<Link
+						onClick={() => setUrl('/')}
 						className={`${css({
 							transition: 'all 0.3s ease-in-out',
 							cursor: 'pointer',

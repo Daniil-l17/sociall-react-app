@@ -49,3 +49,15 @@ export const $UserEmail = styled.span({
 	overflow: 'hidden',
 	fontWeight: '500'
 });
+export const $LoaderWrapper = styled.div({
+	display: 'flex',
+	justifyContent: 'center',
+	width: '100%',
+	alignItems: 'center',
+	height: '20vh'
+});
+
+export const $SubscribersText = styled.h2({
+	fontSize: '18px',
+	fontWeight: '500'
+});

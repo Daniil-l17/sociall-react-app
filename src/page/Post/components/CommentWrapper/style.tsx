@@ -1,8 +1,17 @@
 import styled from '@emotion/styled';
+
+export const $CommentWrapper = styled.div({
+	display: 'flex',
+	width: '100%',
+	marginTop: '20px',
+	flexDirection: 'column',
+	gap: '15px'
+});
+
 export const $ContentItem = styled.div({
 	display: 'flex',
 	position: 'relative',
-	background: '#222222',
+	background: '#212121',
 	padding: '10px 12px',
 	width: '100%',
 	minHeight: '120px',
