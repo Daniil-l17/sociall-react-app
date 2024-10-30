@@ -5,6 +5,7 @@ import { RiDeleteBin6Line } from 'react-icons/ri';
 import {
 	$ContentDescription,
 	$ContentItem,
+	$ContentItemHeartIconWpapperContext,
 	$ContentItemHeader,
 	$ContentItemHeartIconWrapper,
 	$ContentItemHeaderDeleteIcon,
@@ -90,12 +91,16 @@ export const Contentitem: FC<ContentitemProps> = ({ item, mutateDelete, index, i
 						{isPending ? (
 							<Loader size={20} />
 						) : (
-							<div style={{ display: 'inline-block' }}>
+							<$ContentItemHeartIconWpapperContext>
 								<$ContentItemHeartIconWrapper onClick={() => mutate(item.id)}>
 									<h2 style={{ marginTop: '2px', fontWeight: '500' }}>{item.likes.length}</h2>
 									{item.likes.some(el => el.userId === user?.id) ? <IconHeart.HeartLike /> : <IconHeart.HeartIcon />}
 								</$ContentItemHeartIconWrapper>
-							</div>
+								<$ContentItemHeartIconWrapper>
+									<h2 style={{ marginTop: '2px', fontWeight: '500' }}>{item.comments.length}</h2>
+									{<IconHeart.CommentIcon />}
+								</$ContentItemHeartIconWrapper>
+							</$ContentItemHeartIconWpapperContext>
 						)}
 					</$ContentItemHeader>
 				</$ContentItem>

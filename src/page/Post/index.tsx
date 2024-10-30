@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { useAuth } from '../../hooks/userAuth';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { PostsService } from '../Home/services';
@@ -14,6 +14,8 @@ import {
 } from './style';
 import { Avatar, Button, Textarea } from '@mantine/core';
 import { useEffect, useState } from 'react';
+import { CommentWrapper } from './components/CommentWrapper';
+import { PostServiceComment } from './services';
 
 export const Post = () => {
 	const { user, isFetching: isFetchingUser } = useAuth();
@@ -24,6 +26,13 @@ export const Post = () => {
 		queryKey: ['post'],
 		queryFn: async () => {
 			return await PostsService.currentPost(id!);
+		}
+	});
+
+	const { mutate } = useMutation({
+		mutationKey: ['comments'],
+		mutationFn: async () => {
+			return await PostServiceComment.createComment(id!, 'Очень полезно');
 		}
 	});
 
@@ -56,9 +65,12 @@ export const Post = () => {
 			<$ContentItemHearCommnetWrapper>
 				<Textarea placeholder='Добавить коментарий' autosize minRows={2} maxRows={4} value={value} onChange={e => setValue(e.currentTarget.value)} />
 				<$ContentItemHearCommnetWrapperButton>
-					<Button w={200}>Добавить коментарий</Button>
+					<Button onClick={() => mutate()} w={200}>
+						Добавить коментарий
+					</Button>
 				</$ContentItemHearCommnetWrapperButton>
 			</$ContentItemHearCommnetWrapper>
+			<CommentWrapper comments={data.comments} />
 		</div>
 	);
 };

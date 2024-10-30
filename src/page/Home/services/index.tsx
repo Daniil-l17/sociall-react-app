@@ -1,4 +1,5 @@
 import { axiosBase } from '../../../config/axiosBase';
+import { User } from '../../../services/types';
 
 export interface posts {
 	id: string;
@@ -7,8 +8,16 @@ export interface posts {
 	createdAt: string;
 	likes: Like[];
 	author: Author;
-	comments: any[];
+	comments: Comment[];
 	likedByUser: boolean;
+}
+
+export interface Comment {
+	id: string;
+	content: string;
+	userId: string;
+	postId: string;
+	user: User;
 }
 
 export interface Like {
