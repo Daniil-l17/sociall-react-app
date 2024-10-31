@@ -74,7 +74,7 @@ export const Post = () => {
 				<$ContentItemHeader>
 					<Link style={{ display: 'inline-block' }} to={`/users/${data.author.id}`}>
 						<$ContentItemHeaderUserInfo>
-							<Avatar size='md' src={`${import.meta.env['VITE_BAC_STORE-IMG_URL']}${data.author.avatarUrl}`} alt="it's me" />
+							<Avatar size='md' src={`${import.meta.env['VITE_BAC_STORE_IMG_URL']}${data.author.avatarUrl}`} alt="it's me" />
 							<div>
 								<$ContentItemHeaderUserInfoName>{data.author.name}</$ContentItemHeaderUserInfoName>
 								<$ContentItemHeaderUserInfoDate>{new Date(data.createdAt).toLocaleDateString()}</$ContentItemHeaderUserInfoDate>

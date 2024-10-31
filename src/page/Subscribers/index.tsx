@@ -35,7 +35,7 @@ export const Subscribers = () => {
 							<motion.div initial={{ opacity: 0.4 }} animate={{ opacity: 1 }} key={item.id} whileHover={{ scale: 1.02, transition: { duration: 0.4 } }} transition={{ duration: 0.4 }}>
 								<Link to={`/users/${item.following.id}`}>
 									<$HomeAvatarProfile>
-										<$AvatarProfile src={`${import.meta.env['VITE_BAC_STORE-IMG_URL']}${item.following.avatarUrl}`} alt='' />
+										<$AvatarProfile src={`${import.meta.env['VITE_BAC_STORE_IMG_URL']}${item.following.avatarUrl}`} alt='' />
 										<$UserInfoWrrapper>
 											<$UserName className=' text-lg font-medium'>{item.following.name}</$UserName>
 											<$UserEmail className=' text-[#919191] font-medium'>@{item.following.email}</$UserEmail>
@@ -51,7 +51,7 @@ export const Subscribers = () => {
 							<motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} key={item.id} whileHover={{ scale: 1.02, transition: { duration: 0.3 } }} transition={{ duration: 0.5 }}>
 								<Link to={`/users/${item.follower.id}`}>
 									<$HomeAvatarProfile>
-										<$AvatarProfile src={`${import.meta.env['VITE_BAC_STORE-IMG_URL']}${item.follower.avatarUrl}`} alt='' />
+										<$AvatarProfile src={`${import.meta.env['VITE_BAC_STORE_IMG_URL']}${item.follower.avatarUrl}`} alt='' />
 										<$UserInfoWrrapper>
 											<$UserName className=' text-lg font-medium'>{item.follower.name}</$UserName>
 											<$UserEmail className=' text-[#919191] font-medium'>@{item.follower.email}</$UserEmail>

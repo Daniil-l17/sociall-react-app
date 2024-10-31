@@ -81,7 +81,7 @@ export const Contentitem: FC<ContentitemProps> = ({ item, mutateDelete, index, i
 						<Link to={`/posts/${item.id}`}>
 							<Link style={{ display: 'inline-block' }} to={`/users/${item.author.id}`}>
 								<$ContentItemHeaderUserInfo>
-									<Avatar size='md' src={`${import.meta.env['VITE_BAC_STORE-IMG_URL']}${item.author.avatarUrl}`} alt="it's me" />
+									<Avatar size='md' src={`${import.meta.env['VITE_BAC_STORE_IMG_URL']}${item.author.avatarUrl}`} alt="it's me" />
 									<div>
 										<$ContentItemHeaderUserInfoName>{item.author.name}</$ContentItemHeaderUserInfoName>
 										<$ContentItemHeaderUserInfoDate>{dayjs(item.createdAt).locale(localeObject).fromNow()}</$ContentItemHeaderUserInfoDate>

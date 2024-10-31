@@ -32,7 +32,7 @@ export const CommentItem: FC<PropsCommentItem> = ({ comment, user, mutate, isPen
 					<$ContentItem>
 						<$ContentItemHeader>
 							<$ContentItemHeaderUserInfo>
-								<Avatar size='md' src={`${import.meta.env['VITE_BAC_STORE-IMG_URL']}${comment.user.avatarUrl}`} alt="it's me" />
+								<Avatar size='md' src={`${import.meta.env['VITE_BAC_STORE_IMG_URL']}${comment.user.avatarUrl}`} alt="it's me" />
 								<div>
 									<$ContentItemHeaderUserInfoName>{comment.user.name}</$ContentItemHeaderUserInfoName>
 								</div>

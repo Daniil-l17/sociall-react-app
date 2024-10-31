@@ -86,7 +86,7 @@ export const Users = () => {
 			) : data && user ? (
 				<$UserWrapper>
 					<$UserMenu>
-						<$UserMenuImg src={`${import.meta.env['VITE_BAC_STORE-IMG_URL']}${data?.avatarUrl}`} alt='' />
+						<$UserMenuImg src={`${import.meta.env['VITE_BAC_STORE_IMG_URL']}${data?.avatarUrl}`} alt='' />
 						<$UserMenuText>{data?.name}</$UserMenuText>
 						<Button color={user?.following.some(item => item.followingId === data?.id) ? 'red' : 'blue'} w={180} loading={isPending || isPendingUnfollow} onClick={follow}>
 							{data?.id === user?.id ? 'Редактировать' : user.following.some(item => item.followingId === data?.id) ? 'Отписаться' : 'Подписаться'}

@@ -15,7 +15,7 @@ export const HomeProfileUser: FC<ProfileUserProps> = ({ user, isLoading }) => {
 		>
 			<Link to={`users/${user?.id}`}>
 				<$HomeAvatarProfile>
-					{isLoading ? <Skeleton width={240} height={280} radius='12px' /> : user ? <$AvatarProfile src={`${import.meta.env['VITE_BAC_STORE-IMG_URL']}${user?.avatarUrl}`} alt='' /> : null}
+					{isLoading ? <Skeleton width={240} height={280} radius='12px' /> : user ? <$AvatarProfile src={`${import.meta.env['VITE_BAC_STORE_IMG_URL']}${user?.avatarUrl}`} alt='' /> : null}
 					<$UserInfoWrrapper>
 						{isLoading ? (
 							<>
