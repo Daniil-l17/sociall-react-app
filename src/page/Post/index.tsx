@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useAuth } from '../../hooks/userAuth';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { PostsService } from '../Home/services';
@@ -9,19 +9,23 @@ import {
 	$ContentItemHearCommnetWrapper,
 	$ContentItemHeader,
 	$ContentItemHeaderUserInfo,
+	$LoaderWrapper,
 	$ContentItemHeaderUserInfoDate,
 	$ContentItemHeaderUserInfoName
 } from './style';
-import { Avatar, Button, Textarea } from '@mantine/core';
+import { Avatar, Button, Loader, Textarea } from '@mantine/core';
 import { useEffect, useState } from 'react';
 import { CommentWrapper } from './components/CommentWrapper';
 import { PostServiceComment } from './services';
+import { toast } from 'react-toastify';
 
 export const Post = () => {
 	const { user, isFetching: isFetchingUser } = useAuth();
 	const { id } = useParams();
 	const [value, setValue] = useState('');
 	const navigate = useNavigate();
+	const queryClien = useQueryClient();
+
 	const { data, isFetching } = useQuery({
 		queryKey: ['post'],
 		queryFn: async () => {
@@ -29,18 +33,36 @@ export const Post = () => {
 		}
 	});
 
-	const { mutate } = useMutation({
+	const { mutate, isPending } = useMutation({
 		mutationKey: ['comments'],
-		mutationFn: async () => {
-			return await PostServiceComment.createComment(id!, 'Очень полезно');
+		mutationFn: async ({ id, contentId }: { id?: string; contentId?: string }) => {
+			if (contentId) {
+				return await PostServiceComment.deleteComment(contentId);
+			}
+			return await PostServiceComment.createComment(id!, value);
+		},
+		onSuccess: () => {
+			setValue('');
+			toast.success('Комментарий добавлен', { theme: 'colored' });
+			queryClien.invalidateQueries({ queryKey: ['post'] });
 		}
 	});
 
 	useEffect(() => {
-		if ((!isFetching && !isFetchingUser && !user) || !data) {
-			navigate('/');
+		if (!isFetching && !isFetchingUser) {
+			if (!data || !user) {
+				navigate('/');
+			}
 		}
-	}, [data, isFetching, isFetchingUser]);
+	}, [data, isFetching, user, isFetchingUser]);
+
+	if (isFetching || isFetchingUser) {
+		return (
+			<$LoaderWrapper>
+				<Loader size={30} />
+			</$LoaderWrapper>
+		);
+	}
 
 	if (!data || !user) {
 		return null;
@@ -65,12 +87,12 @@ export const Post = () => {
 			<$ContentItemHearCommnetWrapper>
 				<Textarea placeholder='Добавить коментарий' autosize minRows={2} maxRows={4} value={value} onChange={e => setValue(e.currentTarget.value)} />
 				<$ContentItemHearCommnetWrapperButton>
-					<Button onClick={() => mutate()} w={200}>
+					<Button onClick={() => mutate({ id: data.id })} w={200}>
 						Добавить коментарий
 					</Button>
 				</$ContentItemHearCommnetWrapperButton>
 			</$ContentItemHearCommnetWrapper>
-			<CommentWrapper comments={data.comments} />
+			<CommentWrapper isPending={isPending} mutate={mutate} user={user} comments={data.comments} />
 		</div>
 	);
 };

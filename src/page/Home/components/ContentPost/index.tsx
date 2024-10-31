@@ -23,11 +23,13 @@ import { toast } from 'react-toastify';
 import dayjs from 'dayjs';
 import relativetime from 'dayjs/plugin/relativeTime';
 import { localeObject } from '../../../../utils';
+
 dayjs.extend(relativetime);
 
 export const Contentitem: FC<ContentitemProps> = ({ item, mutateDelete, index, isPendingDelete, user }) => {
 	const [deleteId, setDeleteId] = useState('');
 	const queryClient = useQueryClient();
+
 	function handelClickMutateDelete() {
 		mutateDelete(item.id);
 		setDeleteId(item.id);

@@ -6,7 +6,7 @@ export const UsersService = {
 		const data = (await axiosBase.get<User>(`/users/${id}`)).data;
 		return data;
 	},
-	async updateUser(dto: User) {
+	async updateUser(dto: { name: string; id: string; dateOfBirth: Date | null; bio: string; location: string; avatarUrl: string }) {
 		const data = (await axiosBase.put<User>(`/users/${dto.id}`, dto)).data;
 		return data;
 	},

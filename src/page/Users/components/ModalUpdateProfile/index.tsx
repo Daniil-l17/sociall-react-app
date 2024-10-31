@@ -1,6 +1,5 @@
 import { Button, FileInput, Input, Modal } from '@mantine/core';
 import { FC, useEffect, useState } from 'react';
-import { User } from '../../../../services/types';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { UsersService } from '../../services';
 import { DateInput } from '@mantine/dates';
@@ -9,13 +8,13 @@ import { ModalUpdateProfileType } from './types';
 import { $ModalUpdateProfileInputWrapper } from './style';
 
 export const ModalUpdateProfile: FC<ModalUpdateProfileType> = ({ opened, close, data }) => {
-	const [userInfo, setUserInfo] = useState({} as { name: string; dateOfBirth: Date; bio: string; location: string; avatarUrl: string });
+	const [userInfo, setUserInfo] = useState({} as { name: string; dateOfBirth: Date | null; bio: string; location: string; avatarUrl: string });
 
 	const queryClient = useQueryClient();
 
 	const { mutate, isPending } = useMutation({
 		mutationKey: ['updateProfile'],
-		mutationFn: async (dto: User) => {
+		mutationFn: async (dto: { name: string; id: string; dateOfBirth: Date | null; bio: string; location: string; avatarUrl: string }) => {
 			return await UsersService.updateUser(dto);
 		},
 		onSuccess: () => {
@@ -49,8 +48,13 @@ export const ModalUpdateProfile: FC<ModalUpdateProfileType> = ({ opened, close, 
 		<Modal opened={opened} centered size={'lg'} onClose={close} title='Изменить профиль'>
 			<$ModalUpdateProfileInputWrapper>
 				<Input onChange={handalChangeUserInfo} placeholder='имя' name='name' value={userInfo.name} />
-				<FileInput onChange={handelChangeUpdateProfileImage} accept='image/png,image/jpeg' placeholder='Загрузить фото' />
-				<DateInput placeholder='дата рождения' onChange={event => setUserInfo({ ...userInfo, dateOfBirth: event })} value={userInfo.dateOfBirth ? new Date(userInfo.dateOfBirth) : undefined} />
+				<FileInput value={new File([], userInfo.avatarUrl?.slice(9))} onChange={handelChangeUpdateProfileImage} accept='image/png,image/jpeg' placeholder={'Загрузить фото'} />
+				<DateInput
+					maxDate={new Date()}
+					placeholder='дата рождения'
+					onChange={event => setUserInfo({ ...userInfo, dateOfBirth: event })}
+					value={userInfo.dateOfBirth ? new Date(userInfo.dateOfBirth) : undefined}
+				/>
 				<Input onChange={handalChangeUserInfo} placeholder='биография' name='bio' value={userInfo.bio} />
 				<Input onChange={handalChangeUserInfo} placeholder='место жительства' name='location' value={userInfo.location} />
 			</$ModalUpdateProfileInputWrapper>

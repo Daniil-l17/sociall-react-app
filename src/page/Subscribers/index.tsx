@@ -4,10 +4,10 @@ import { $HomeAvatarProfile, $AvatarProfile, $SubscribersText, $LoaderWrapper, $
 import { motion } from 'framer-motion';
 import { useEffect } from 'react';
 import { Loader } from '@mantine/core';
+
 export const Subscribers = () => {
 	const { user, isFetching } = useAuth();
 	const navigate = useNavigate();
-
 	const { pathname } = useLocation();
 
 	useEffect(() => {

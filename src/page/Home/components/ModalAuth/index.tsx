@@ -1,30 +1,28 @@
 import { Button, Input, Modal } from '@mantine/core';
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { $ModalAuthInfoRegistration, $ModalAuthWrapper, $ModalAuthInputError, $ModalAuthWrapperInput, $ModalAuthInputItem } from './style';
 import { useForm } from 'react-hook-form';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { AuhtService } from '../../../../services';
 import { toast } from 'react-toastify';
-type ModalAuthProps = {
-	opened: boolean;
-	close: () => void;
-};
-
-type Inputs = {
-	name?: string;
-	email: string;
-	password: string;
-};
+import { Inputs, ModalAuthProps } from './types';
 
 const ModalAuth: FC<ModalAuthProps> = ({ close, opened }) => {
 	const {
 		register,
+		reset,
 		handleSubmit,
 		formState: { errors }
 	} = useForm<Inputs>();
 	const queryClient = useQueryClient();
 
 	const [auth, setAuth] = useState<'login' | 'register'>('login');
+
+	useEffect(() => {
+		if (!opened) {
+			setAuth('login');
+		}
+	}, [opened]);
 
 	const { mutate, isPending } = useMutation({
 		mutationKey: ['auth'],
@@ -37,16 +35,17 @@ const ModalAuth: FC<ModalAuthProps> = ({ close, opened }) => {
 				if (auth === 'login') {
 					localStorage.setItem('token', req.token);
 					close();
+					queryClient.invalidateQueries({ queryKey: ['userAuth'] });
+					queryClient.invalidateQueries({ queryKey: ['postsAll'] });
 				}
 			} else {
 				setAuth('login');
 			}
-			queryClient.invalidateQueries({ queryKey: ['userAuth'] });
-			queryClient.invalidateQueries({ queryKey: ['postsAll'] });
+			reset();
 			toast.success(auth === 'register' ? 'Вы вошли в аккаунт' : 'Вы зарегистрировались', { theme: 'colored' });
 		},
 		onError: () => {
-			toast.error('Неверный логин или пароль', { theme: 'colored' });
+			toast.error(auth === 'login' ? 'Неверный логин или пароль' : 'Пользователь с таким email уже существует', { theme: 'colored' });
 		}
 	});
 
@@ -79,7 +78,7 @@ const ModalAuth: FC<ModalAuthProps> = ({ close, opened }) => {
 						{errors.email && <$ModalAuthInputError>Это поле обязательно</$ModalAuthInputError>}
 					</$ModalAuthInputItem>
 					<$ModalAuthInputItem>
-						<Input {...register('password', { required: true })} placeholder='Пароль' />
+						<Input {...register('password', { required: true, minLength: 6 })} placeholder='Пароль' />
 						{errors.password && <$ModalAuthInputError>Это поле обязательно</$ModalAuthInputError>}
 					</$ModalAuthInputItem>
 				</$ModalAuthWrapperInput>

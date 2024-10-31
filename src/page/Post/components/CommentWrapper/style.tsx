@@ -7,3 +7,10 @@ export const $CommentWrapper = styled.div({
 	flexDirection: 'column',
 	gap: '15px'
 });
+
+export const $CommenTextNoComment = styled.h2({
+	textAlign: 'center',
+	marginTop: '20px',
+	fontSize: '20px',
+	fontWeight: 500
+});

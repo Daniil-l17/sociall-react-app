@@ -12,8 +12,6 @@ export const $LoaderWrapper = styled.div({
 	height: '30vh'
 });
 
-const $ErrorWrapper = styled.div({});
-
 export const $UserMenu = styled.div({
 	display: 'flex',
 	background: '#222222',

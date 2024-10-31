@@ -65,3 +65,11 @@ export const $ContentItemHearCommnetWrapperButton = styled.h2({
 	display: 'flex',
 	justifyContent: 'end'
 });
+
+export const $LoaderWrapper = styled.div({
+	display: 'flex',
+	justifyContent: 'center',
+	width: '100%',
+	alignItems: 'center',
+	height: '30vh'
+});
