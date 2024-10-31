@@ -41,8 +41,8 @@ const ModalAuth: FC<ModalAuthProps> = ({ close, opened }) => {
 			} else {
 				setAuth('login');
 			}
+			toast.success(auth === 'login' ? 'Вы вошли в аккаунт' : 'Вы зарегистрировались', { theme: 'colored' });
 			reset();
-			toast.success(auth === 'register' ? 'Вы вошли в аккаунт' : 'Вы зарегистрировались', { theme: 'colored' });
 		},
 		onError: () => {
 			toast.error(auth === 'login' ? 'Неверный логин или пароль' : 'Пользователь с таким email уже существует', { theme: 'colored' });
