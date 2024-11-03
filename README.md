@@ -1,28 +1,74 @@
-# React + TypeScript + Vite
+# Социальное приложение
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Это приложение было создано с помощью React, emotionCss, react-query
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Функции
 
-## Expanding the ESLint configuration
+- Слушайте свою любимую музыку
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- Попадание в топ-чарты России
 
-- Configure the top-level `parserOptions` property like this:
+ - Получение всей информации о песне
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
+ - Сохранения истории поиска
+
+ - Получение всей информации об исполнителе
+
+ - Пользовательский плеер
+
+ - авторизация аккаунта
+
+  - добовлять в избранное
+
+ - Подгрузка данных с помощью React-intersection-observer
+
+ - Получение Альбома Артиста
+
+ - Сохранение музыкальных данных, чтобы они не приостанавливались на других страницах.
+
+ - Кроссбраузерное приложение
+ 
+-  Красивые анимации
+
+
+## Запускается локально
+
+Ссылка на сайт
+
+```bash
+https://search-react-weld.vercel.app/](https://music-listening-apps.vercel.app/
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
-# sociall-react-app
+Клонировать проект
+
+```bash
+https://github.com/Daniil-l17/music-listening-apps.git
+```
+
+Устанавливать зависимости
+
+```bash
+yarn install
+```
+
+Запустите приложение в dev
+
+```bash
+yarn dev
+```
+
+Запустите приложение в рабочем режиме
+
+```bash
+yarn build
+```
+
+Затем
+
+```bash
+yarn start
+```
+
+## Screenshots
+
